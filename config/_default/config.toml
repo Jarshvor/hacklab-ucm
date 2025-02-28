@@ -1,8 +1,10 @@
-title = 'HackLAB BBAA'
-baseURL = 'https://jarshvor.github.io/hacklab-bbaa'
+title = 'HackLAB UCM'
+baseURL = 'https://jarshvor.github.io/hacklab-ucm'
 
 defaultContentLanguage = 'en'
 languageCode = 'en-us'
+
+removePathAccents = true
 
 googleAnalytics = ''
 
@@ -11,3 +13,9 @@ enableGitInfo = true
 markup.highlight.noClasses = false
 
 theme = 'docura'
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+  author = 'authors'
+  material = 'materials'

@@ -2,14 +2,16 @@
 name: Deploy Hugo site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Run on pushes targeting the following branches:
   push:
     branches:
 #      - main
       - publish
+      - hotfix
+      - '*_edits'
     # Run when matching the following tags:
 #    tags:
-#      - v*.*
+#      - 'v*.*'
 
 
   # Allows you to run this workflow manually from the Actions tab
@@ -66,7 +68,7 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./public
 

@@ -1,0 +1,11 @@
+<article id="article">
+    {{ .Render "article-header" }}
+    {{ partial "article-cover" . }}
+    {{ partial "article-content" . }}
+
+  {{ if eq .Kind "section" }}
+    {{ partial "list-range" . }}
+  {{ end }}
+
+    {{ partial "article-footer" . }}
+</article>

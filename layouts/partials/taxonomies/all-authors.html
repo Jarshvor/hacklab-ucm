@@ -1,0 +1,27 @@
+{{ $baseURL := .Site.BaseURL }}			<!-- Store baseURL which we will use later. -->
+{{ $taxonomy := "authors" }}			<!-- Manually set the appropriate taxonomy. -->
+{{ with site.GetPage $taxonomy }}
+<div id="all-authors">
+  <h1>{{ .LinkTitle }}:</h1>			<!-- Print the taxonomy as title. Authors:, Tags: etc. -->
+
+  {{ $terms := .Pages }}				<!-- Store the .Pages of the current taxonomy in a $terms variable. -->
+										<!-- The pages are listed in default order, but in the future we could consider sorting alphabetically, by count, or custom relationship (nº of other related terms), similar materials, etc.  -->
+
+  {{ $termLinks := slice }}				<!-- Create an empty slice. -->
+
+										<!-- Range over the $terms of the taxonomy with $term as each item. -->
+										<!-- Set the $link for each $term using the $baseURL, $taxonomy, and .LinkTitle -->
+										<!-- For each iteration add an <href> anchor to the $termLinks "array", made with:
+											 the $link, the .LinkTitle and also a count of pages for that $term) -->
+  {{ range $term := $terms }}
+	{{ $link := printf "%s%s/%s" $baseURL $taxonomy ($term.LinkTitle | urlize) }}
+    {{ $termLinks = $termLinks | append (printf "<a href='%s'>%s (%d)</a>" $link $term.LinkTitle (len $term.Pages)) }}
+  {{ end }}
+
+  {{ with delimit $termLinks ", " }}	<!-- Delimit all the $termLinks with a comma. -->
+    {{ . | safeHTML }}
+  {{ end }}
+{{ else }}
+  <p>Taxonomy is EMPTY, or NOT a VALID taxonomy.</p>
+<div>
+{{ end }}
